@@ -18,7 +18,7 @@ export interface IHeaderOption {
 }
 
 // prettier-ignore
-export const HEADER_OPTIONS = (params: { id: string }) => ({
+export const HEADER_OPTIONS = (params: { id?: string }) => ({
   GLOBAL: {
     "/section02/02-02-layout-header-global": {title: "게시글 수정",hasLogo: false, hasBack: true },
     "/section02/02-04-layout-header-transparent": {title: "사진 상세",hasLogo: false, hasBack: true, isTransparent: true },
