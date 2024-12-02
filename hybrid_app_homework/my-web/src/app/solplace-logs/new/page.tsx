@@ -11,11 +11,14 @@ import { getBase64 } from "@/commons/utils/getBase64";
 import TextArea from "@/commons/ui/textarea";
 import KaKaoMap from "@/components/kakao-map";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useDataSetting } from "@/commons/settings/hook";
 
 export default function SolPlaceNewPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const showmap = searchParams.get("showmap") === "true";
+
+  const { fetchApp } = useDataSetting();
 
   const method = useForm({
     mode: "onChange",
@@ -44,6 +47,27 @@ export default function SolPlaceNewPage() {
   const logSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("로그 등록", method.getValues(), imageUrl);
+  };
+
+  const onSearchMap = async () => {
+    // const result = await fetchApp({ query: "fetchDeviceLocationLatLngSet" }); // 위치 정보 권한 요청 및 정보 가져오기
+    // console.log(result);
+
+    // result.data &&
+    //   method.setValue("lat", result.data.fetchDeviceLocationLatLngSet.lat);
+    // result.data &&
+    //   method.setValue("lng", result.data.fetchDeviceLocationLatLngSet.lng);
+
+    window.history.pushState(
+      null,
+      "",
+      `?lng=37.56682&lat=126.97865&showmap=true`
+    );
+    window.history.replaceState(
+      null,
+      "",
+      `?lng=37.56682&lat=126.97865&showmap=true`
+    );
   };
 
   return (
@@ -112,12 +136,13 @@ export default function SolPlaceNewPage() {
                   title="플레이스 주소"
                   type="text"
                   keyname="address"
-                  readOnly
+                  required
                   hidden
+                  readOnly
                 />
-                <Input type="number" keyname="zonecode" readOnly hidden />
-                <Input type="number" keyname="lng" readOnly hidden />
-                <Input type="number" keyname="lat" readOnly hidden />
+                <Input type="number" keyname="zonecode" hidden readOnly />
+                <Input type="number" keyname="lng" hidden readOnly />
+                <Input type="number" keyname="lat" hidden readOnly />
               </div>
 
               {/* <PostSearchPopBtn
@@ -133,10 +158,7 @@ export default function SolPlaceNewPage() {
 
               <button
                 type="button"
-                onClick={() => {
-                  window.history.pushState(null, "", `?showmap=true`);
-                  window.history.replaceState(null, "", `?showmap=true`);
-                }}
+                onClick={() => onSearchMap()}
                 className="flex items-center justify-between w-full h-11 px-3 border border-black rounded-lg font-bold whitespace-nowrap truncate"
               >
                 {method.watch("address") || "플레이스 주소 입력"}
@@ -147,24 +169,31 @@ export default function SolPlaceNewPage() {
             {showmap && (
               <div className="fixed left-0 top-0 z-auto w-screen h-screen flex flex-col justify-between">
                 <KaKaoMap
-                  className="w-screen min-h-[37.75rem]"
-                  lat={37.566772}
-                  lng={126.978182}
-                  showMarker={true}
+                  className="w-screen flex flex-1"
+                  lat={method.getValues("lat") ?? null}
+                  lng={method.getValues("lng") ?? null}
+                  setAddress={(value) => {
+                    method.setValue("address", value);
+                    method.trigger("address");
+                  }}
                 />
-                <Footer className="bg-white flex flex-col gap-5 p-5">
-                  <input className="rounded-3xl h-12 shadow-[0px_0px_8px_0px_#00000029]" />
+                <div className="bg-white flex flex-col gap-5 p-5">
+                  <input
+                    className="rounded-3xl text-center h-12 shadow-[0px_0px_8px_0px_#00000029]"
+                    value={method.watch("address")}
+                    readOnly
+                  />
 
                   <button
+                    className="bg-[var(--primary)] h-12 text-white font-bold text-lg leading-6 rounded-lg"
                     onClick={() => {
                       window.history.pushState(null, "", `?showmap=false`);
                       window.history.replaceState(null, "", `?showmap=false`);
                     }}
-                    className="bg-[var(--primary)] h-12 text-white font-bold text-lg leading-6 rounded-lg"
                   >
                     이 위치로 등록
                   </button>
-                </Footer>
+                </div>
               </div>
             )}
 
