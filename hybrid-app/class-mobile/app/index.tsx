@@ -18,8 +18,13 @@
 // import PostMessageAppToWebPage from "@/components/section03/03-03-post-message-app-to-web";
 // import PostMessageDeviceApiPage from "@/components/section03/03-04-post-message-device-api";
 // import PostMessageDeviceApiPromisePage from "@/components/section03/03-05-post-message-device-api-promise";
-import PostMessageDeviceApiPromiseRefactoringPage from "@/components/section03/03-06-post-message-device-api-promise-refactoring";
+// import PostMessageDeviceApiPromiseRefactoringPage from "@/components/section03/03-06-post-message-device-api-promise-refactoring";
+
+// [ Section04 ]
+// import DeviceSystemApiPage from "@/components/section04/04-01-device-system-api";
+// import DeviceLocationApiPage from "@/components/section04/04-02-device-location-api";
+import DeviceApiRefactoringPage from "@/components/section04/04-03-device-api-refactoring";
 
 export default function StartPage() {
-  return <PostMessageDeviceApiPromiseRefactoringPage />;
+  return <DeviceApiRefactoringPage />;
 }

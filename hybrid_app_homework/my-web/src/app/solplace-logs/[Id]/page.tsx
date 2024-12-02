@@ -52,7 +52,13 @@ export default function SolPlaceDetailPage() {
               )}
             </button>
           </div>
-          {isMapVisible && <KaKaoMap lat={37.566772} lng={126.978182} />}
+          {isMapVisible && (
+            <KaKaoMap
+              className="rounded-xl w-[calc(100vw - 2.5rem)] h-[10rem]"
+              lat={37.566772}
+              lng={126.978182}
+            />
+          )}
         </div>
         <hr />
         <p className="text-sm leading-5">

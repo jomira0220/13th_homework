@@ -1,4 +1,4 @@
-import { useApis } from "@/apis/section03/03-06-post-message-device-api-promise-refactoring";
+import { useApis } from "@/apis/section04/04-02-device-location-api";
 import { useRef } from "react";
 import { StatusBar, SafeAreaView, Platform } from "react-native";
 import { WebView } from "react-native-webview";
@@ -7,7 +7,7 @@ import { WebView } from "react-native-webview";
 const androidEmulatorAddress = "http://10.0.2.2:3000"; // 안드로이드 에뮬레이터에서 접속하기
 const iosEmulatorAddress = "http://127.0.0.1:3000"; // IOS 에뮬레이터에서 접속하기
 
-export default function PostMessageDeviceApiPromiseRefactoringPage() {
+export default function DeviceLocationApiPage() {
   const webviewRef = useRef<WebView>(null);
   const { onRequest } = useApis(webviewRef);
 
@@ -22,7 +22,7 @@ export default function PostMessageDeviceApiPromiseRefactoringPage() {
               Platform.OS === "android"
                 ? androidEmulatorAddress
                 : iosEmulatorAddress
-            }/section03/03-06-post-message-device-api-promise-refactoring`,
+            }/section04/04-02-device-location-api`,
           }}
           onMessage={(event) => {
             if (!event.nativeEvent.data) return;

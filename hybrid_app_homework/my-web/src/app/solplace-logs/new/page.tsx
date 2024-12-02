@@ -9,8 +9,14 @@ import PostSearchPopBtn from "@/components/post-pop";
 import Input from "@/commons/ui/input";
 import { getBase64 } from "@/commons/utils/getBase64";
 import TextArea from "@/commons/ui/textarea";
+import KaKaoMap from "@/components/kakao-map";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SolPlaceNewPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const showmap = searchParams.get("showmap") === "true";
+
   const method = useForm({
     mode: "onChange",
   });
@@ -114,7 +120,7 @@ export default function SolPlaceNewPage() {
                 <Input type="number" keyname="lat" readOnly hidden />
               </div>
 
-              <PostSearchPopBtn
+              {/* <PostSearchPopBtn
                 className="flex items-center justify-between w-full h-11 px-3 border border-black rounded-lg font-bold whitespace-nowrap truncate"
                 setaddress={(value) => method.setValue("address", value)}
                 setzonecode={(value) => method.setValue("zonecode", value)}
@@ -123,28 +129,45 @@ export default function SolPlaceNewPage() {
               >
                 {method.watch("address") || "플레이스 주소 입력"}
                 <IoIosArrowForward size={24} />
-              </PostSearchPopBtn>
+              </PostSearchPopBtn> */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  window.history.pushState(null, "", `?showmap=true`);
+                  window.history.replaceState(null, "", `?showmap=true`);
+                }}
+                className="flex items-center justify-between w-full h-11 px-3 border border-black rounded-lg font-bold whitespace-nowrap truncate"
+              >
+                {method.watch("address") || "플레이스 주소 입력"}
+                <IoIosArrowForward size={24} />
+              </button>
             </div>
-            {/* 
-            <label className="flex flex-col gap-2">
-              <div className="flex items-start gap-1">
-                <span className="font-semibold text-xs leading-[1.25rem]">
-                  플레이스 내용
-                </span>
-                <span className="text-red-600 leading-none">*</span>
+
+            {showmap && (
+              <div className="fixed left-0 top-0 z-auto w-screen h-screen flex flex-col justify-between">
+                <KaKaoMap
+                  className="w-screen min-h-[37.75rem]"
+                  lat={37.566772}
+                  lng={126.978182}
+                  showMarker={true}
+                />
+                <Footer className="bg-white flex flex-col gap-5 p-5">
+                  <input className="rounded-3xl h-12 shadow-[0px_0px_8px_0px_#00000029]" />
+
+                  <button
+                    onClick={() => {
+                      window.history.pushState(null, "", `?showmap=false`);
+                      window.history.replaceState(null, "", `?showmap=false`);
+                    }}
+                    className="bg-[var(--primary)] h-12 text-white font-bold text-lg leading-6 rounded-lg"
+                  >
+                    이 위치로 등록
+                  </button>
+                </Footer>
               </div>
-              <textarea
-                className="font-medium h-[9.25rem] rounded-lg border border-gray-200 p-4 placeholder:text-gray-400"
-                placeholder="플레이스 내용을 입력해 주세요. (1자 이상)"
-                {...method.register("contents", {
-                  required: true,
-                  minLength: {
-                    value: 1,
-                    message: "플레이스 내용을 입력해 주세요",
-                  },
-                })}
-              />
-            </label> */}
+            )}
+
             <TextArea
               keyname="contents"
               title="플레이스 내용"

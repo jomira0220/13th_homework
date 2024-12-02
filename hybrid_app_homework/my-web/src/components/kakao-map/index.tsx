@@ -12,22 +12,32 @@ import { useEffect, useState } from "react";
 interface IKakaoMap {
   lat: number;
   lng: number;
+  className?: string;
 }
 
-export default function KaKaoMap({ lat, lng }: IKakaoMap) {
+export default function KaKaoMap({ lat, lng, className }: IKakaoMap) {
   useKakaoLoader();
+
+  const [position, setPosition] = useState({ lat, lng });
 
   return (
     <>
       <Map
-        className="rounded-xl"
+        className={className}
         center={{ lat, lng }}
-        style={{ width: "calc(100vw - 2.5rem)", height: "10rem" }}
         level={3}
+        onTileLoaded={(map) =>
+          setPosition({
+            lat: map.getCenter().getLat(),
+            lng: map.getCenter().getLng(),
+          })
+        }
       >
         <MapTypeControl position={"TOPRIGHT"} />
         <ZoomControl position={"RIGHT"} />
-        <MapMarker key={`marker__${lat}-${lng}`} position={{ lat, lng }} />
+        {!!position && (
+          <MapMarker key={`marker__${lat}-${lng}`} position={position} />
+        )}
       </Map>
     </>
   );
