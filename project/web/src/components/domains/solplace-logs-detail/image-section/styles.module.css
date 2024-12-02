@@ -1,0 +1,12 @@
+.section {
+  position: relative;
+  margin-left: -1.25rem;
+  width: 100vw;
+}
+
+.indicator {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 1;
+}
