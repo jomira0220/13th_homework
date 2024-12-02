@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "@/commons/styles/reset.css"; // 글로벌 스타일 커스텀 처리 및 초기화 처리 css
 import Layout from "@/commons/layout";
 
 export const metadata: Metadata = {
