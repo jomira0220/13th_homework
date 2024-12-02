@@ -1,16 +1,23 @@
 import KaKaoMap from "@/components/kakao-map";
+import { useSearchParams } from "next/navigation";
+import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
 
 export default function SolplaceLogsMap() {
+
+  const searchParams = useSearchParams();
+  const params = Object.fromEntries(searchParams.entries());
+  const { mapClick, address, position } = useKakaoMap({
+    address: params.address || "서울특별시 중구 세종대로 110",
+    position: { lat: Number(params.lat) || 37.5666, lng: Number(params.lng) || 126.979 },
+  });
+
   return (
     <div className="fixed left-0 top-0 z-auto w-screen h-screen flex flex-col justify-between">
       <KaKaoMap
         className="w-screen flex flex-1"
-        lat={method.getValues("lat") ?? null}
-        lng={method.getValues("lng") ?? null}
-        setAddress={(value) => {
-          method.setValue("address", value);
-          method.trigger("address");
-        }}
+        lat={position?.lat ?? null}
+        lng={position?.lng ?? null}
+        setAddress={(value) => }
       />
       <div className="bg-white flex flex-col gap-5 p-5">
         <input
