@@ -10,7 +10,7 @@ export default function DataSetting({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    // 01. 안드로이드
+    // 01. 안드로이드 수신 대기
     document.addEventListener("message", (message: any) => {
       const response = JSON.parse(message.data);
       const queryName = `${Object.keys(response)[0]}`;
