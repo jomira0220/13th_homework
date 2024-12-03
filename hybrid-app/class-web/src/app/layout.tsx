@@ -5,7 +5,9 @@ import "./globals.css";
 // import LayoutGlobalAndLocal from "@/commons/layout/02-03-layout-header-local";
 // import LayoutHeaderTransparent from "@/commons/layout/02-04-layout-header-transparent";
 // import LayoutFooterContentsShortAndLong from "@/commons/layout/02-05-layout-footer-contents-short-and-long";
-import DeviceSetting from "@/commons/settings/03-06-device-setting";
+// import DeviceSetting from "@/commons/settings/03-06-device-setting";
+// import DeviceSettingVariables from "@/commons/settings/05-01-device-setting-variables";
+import DeviceSettingRedirect from "@/commons/settings/05-02-device-setting-redirect";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -49,7 +51,13 @@ export default function RootLayout({
         {/* {children} */}
 
         {/* 6). 03-06-post-message-device-api-promise-refactoring */}
-        <DeviceSetting>{children}</DeviceSetting>
+        {/* <DeviceSetting>{children}</DeviceSetting> */}
+
+        {/* 7). 05-01-schedule-notifications */}
+        {/* <DeviceSettingVariables>{children}</DeviceSettingVariables> */}
+
+        {/* 8). 05-02-schedule-notifications-click */}
+        <DeviceSettingRedirect>{children}</DeviceSettingRedirect>
       </body>
     </html>
   );

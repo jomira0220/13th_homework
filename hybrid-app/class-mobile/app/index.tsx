@@ -23,8 +23,12 @@
 // [ Section04 ]
 // import DeviceSystemApiPage from "@/components/section04/04-01-device-system-api";
 // import DeviceLocationApiPage from "@/components/section04/04-02-device-location-api";
-import DeviceApiRefactoringPage from "@/components/section04/04-03-device-api-refactoring";
+// import DeviceApiRefactoringPage from "@/components/section04/04-03-device-api-refactoring";
+
+// [ Section05 ]
+// import ScheduleNotificationsPage from "@/components/section05/05-01-schedule-notifications";
+import ScheduleNotificationsClickPage from "@/components/section05/05-02-schedule-notifications-click";
 
 export default function StartPage() {
-  return <DeviceApiRefactoringPage />;
+  return <ScheduleNotificationsClickPage />;
 }
