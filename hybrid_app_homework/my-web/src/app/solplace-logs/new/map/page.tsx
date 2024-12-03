@@ -1,5 +1,4 @@
-import KaKaoMap from "@/components/kakao-map";
-import SolplaceLogsMap from "@/components/solplace-logs-map";
+import SolplaceLogsMap from "@/components/solplace-logs/edit-new-map";
 
 export default function SolplaceLogsNewMapPage() {
   return <SolplaceLogsMap />;

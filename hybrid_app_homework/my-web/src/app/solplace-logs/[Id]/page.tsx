@@ -4,7 +4,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineCreate } from "react-icons/md";
 import KaKaoMap from "@/components/kakao-map";
-import SolPlaceDetailSlide from "@/components/solplace-detail-slide";
+import SolPlaceDetailSlide from "@/components/solplace-logs/detail-slide";
 import { useState } from "react";
 import Link from "next/link";
 import { Header } from "@/commons/layout/header";
@@ -16,7 +16,7 @@ export default function SolPlaceDetailPage() {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <SolPlaceDetailSlide />
 
@@ -81,6 +81,6 @@ export default function SolPlaceDetailPage() {
           따뜻한 브런치 한 접시가 기다리고 있어요.
         </p>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { usePathname, useParams } from "next/navigation";
 
 export default function Footer({
   children,
@@ -8,9 +7,6 @@ export default function Footer({
   children: React.ReactNode;
   isFixed?: boolean;
 }) {
-  const pathname = usePathname();
-  const params = useParams();
-
   return (
     <>
       <div style={{ flex: 1 }}></div>

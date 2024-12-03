@@ -1,6 +1,6 @@
 "use client";
 
-import { HEADER_OPTION } from "@/commons/layout/contants";
+import { HeaderType } from "@/commons/layout/header/contants";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import styles from "./styles.module.css";
@@ -43,7 +43,7 @@ const HeaderBase = ({
 export default function HeaderGlobal() {
   const pathname = usePathname();
   const params = useParams();
-  const options = HEADER_OPTION(params).GLOBAL[pathname];
+  const options = HeaderType(params).GLOBAL[pathname];
 
   return (
     <div style={{ display: options ? "block" : "none" }}>
@@ -55,7 +55,7 @@ export default function HeaderGlobal() {
 export function Header({ children, ...rest }: { children?: React.ReactNode }) {
   const pathname = usePathname();
   const params = useParams();
-  const options = HEADER_OPTION(params).LOCAL[pathname];
+  const options = HeaderType(params).LOCAL[pathname];
 
   console.log("options", options);
   return (

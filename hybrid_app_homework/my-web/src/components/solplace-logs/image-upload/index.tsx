@@ -1,3 +1,5 @@
+"use client";
+
 import { useImageUploadStore } from "@/commons/stores/image-upload";
 import { useFormContext } from "react-hook-form";
 import type { FieldValues, Path, PathValue } from "react-hook-form";
@@ -6,12 +8,10 @@ import Image from "next/image";
 import { IoIosClose, IoIosAdd } from "react-icons/io";
 
 interface IImageUpload<T> {
-  className: string;
   name: Path<T>;
 }
 
 export default function ImageUpload<T extends FieldValues>({
-  className,
   name,
   ...rest
 }: IImageUpload<T>) {
@@ -64,7 +64,7 @@ export default function ImageUpload<T extends FieldValues>({
   };
 
   return (
-    <div className="grid grid-cols-[1fr_3fr] p-[1.25rem_1.25rem_0]">
+    <div className="grid grid-cols-[1fr_3fr]">
       <input
         type="file"
         accept="image/*"
@@ -77,7 +77,7 @@ export default function ImageUpload<T extends FieldValues>({
       />
       <button
         type="button"
-        className={className}
+        className="w-[6.25rem] h-[6.25rem] bg-gray-50 flex flex-col items-center justify-center text-[0.75rem] lading-[1.25rem] rounded-lg text-gray-600"
         onClick={() => imgUploadClick()}
         {...rest}
       >

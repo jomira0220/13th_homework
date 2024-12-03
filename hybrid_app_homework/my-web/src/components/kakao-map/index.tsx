@@ -13,15 +13,9 @@ interface IKakaoMap {
   lat: number;
   lng: number;
   className?: string;
-  setAddress: (address: string) => void;
 }
 
-export default function KaKaoMap({
-  lat,
-  lng,
-  className,
-  setAddress,
-}: IKakaoMap) {
+export default function KaKaoMap({ lat, lng, className }: IKakaoMap) {
   useKakaoLoader();
 
   const { position, address, mapClick } = useKakaoMap({
