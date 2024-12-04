@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 interface ITextAreaProps {
   title?: string;
   placeholder?: string;
-  keyname: string;
+  name: string;
   isError?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   required?: boolean;
@@ -14,7 +14,7 @@ interface ITextAreaProps {
 export default function TextArea({
   title,
   placeholder,
-  keyname,
+  name,
   isError = false,
   onChange,
   required,
@@ -24,7 +24,7 @@ export default function TextArea({
   return (
     <label className="flex flex-col gap-2">
       {title && (
-        <div className="flex items-start gap-1">
+        <div className="flex items-start">
           <span className="font-semibold text-xs leading-[1.25rem]">
             {title}
           </span>
@@ -35,8 +35,7 @@ export default function TextArea({
       <textarea
         className="font-medium h-[9.25rem] rounded-lg border border-gray-200 p-4 placeholder:text-gray-400"
         placeholder={placeholder}
-        {...register(keyname, {
-          onChange: () => onChange && onChange,
+        {...register(name, {
           required: required,
           minLength: {
             value: 1,
@@ -46,7 +45,7 @@ export default function TextArea({
       />
       {isError && formState.errors && (
         <div className="text-red-600">
-          {formState.errors.message?.toString()}
+          {formState.errors[name]?.message?.toString()}
         </div>
       )}
     </label>
