@@ -6,36 +6,32 @@ import {
   ZoomControl,
   MapMarker,
 } from "react-kakao-maps-sdk";
-import useKakaoLoader from "@/commons/hooks/use-kakao-loader";
+import { useKakaoLoader } from "@/commons/hooks/use-kakao-loader";
 import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
 
 interface IKakaoMap {
-  lat: number;
-  lng: number;
+  lat?: number;
+  lng?: number;
   className?: string;
 }
 
 export default function KaKaoMap({ lat, lng, className }: IKakaoMap) {
   useKakaoLoader();
-
-  const { position, address, mapClick } = useKakaoMap({
-    position: { lat, lng },
-    address: "",
-  });
+  const { position, mapClick } = useKakaoMap({ lat, lng });
 
   return (
     <>
       <Map
         className={className}
-        center={position || { lat, lng }}
+        center={position}
         level={3}
-        onClick={(_, mouseEvent) => mapClick(mouseEvent)}
+        onClick={(_, mouseEvent) => {
+          mapClick(mouseEvent);
+        }}
       >
         <MapTypeControl position={"TOPRIGHT"} />
         <ZoomControl position={"RIGHT"} />
-        {!!position && (
-          <MapMarker key={`marker__${lat}-${lng}`} position={position} />
-        )}
+        <MapMarker key={`marker__${lat}-${lng}`} position={position} />
       </Map>
     </>
   );
