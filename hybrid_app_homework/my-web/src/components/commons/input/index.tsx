@@ -8,7 +8,7 @@ interface IInputProps {
   readOnly?: boolean;
   title?: string;
   type: string;
-  keyname: string;
+  name: string;
   isError?: boolean;
   hidden?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,15 +16,13 @@ interface IInputProps {
 }
 
 export default function Input({
-  className,
   placeholder,
   readOnly,
   title,
   type,
-  keyname,
+  name,
   isError = false,
   hidden = false,
-  onChange,
   required,
 }: IInputProps) {
   const { register, formState } = useFormContext();
@@ -40,22 +38,19 @@ export default function Input({
         </div>
       )}
       <input
-        className={`h-11 font-medium rounded-lg border border-gray-200 px-4 placeholder:text-gray-400 ${
-          className || ""
-        }`}
+        className="h-11 font-medium rounded-lg border border-gray-200 px-4 placeholder:text-gray-400"
         type={type}
         placeholder={placeholder}
         readOnly={readOnly}
         hidden={hidden}
-        {...register(keyname, {
-          onChange: () => onChange && onChange,
+        {...register(name, {
           required: required,
         })}
       />
 
       {isError && formState.errors && (
         <div className="text-red-600">
-          {formState.errors.message?.toString()}
+          {formState.errors[name]?.message?.toString()}
         </div>
       )}
     </label>
