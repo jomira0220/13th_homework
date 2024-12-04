@@ -82,9 +82,9 @@ export default function ReactNativeTagsPage() {
           backgroundColor = "black" : 노치영역의 배경색을 변경
       */}
       <StatusBar
-        translucent={false}
-        barStyle="dark-content"
-        backgroundColor="white"
+        translucent={false} // 노치영역을 겹침 여부
+        barStyle="dark-content" // 노치영역의 글자색 변경
+        backgroundColor="white" // 노치영역의 배경색 변경
       />
 
       {/* 6. IOS 노치  */}
