@@ -84,7 +84,7 @@ export default function ImageUpload<T extends FieldValues>({
         <IoIosAdd size={24} />
         사진 등록
       </button>
-      <div className="overflow-x-auto whitespace-nowrap pr-[3.125rem]">
+      <div className="overflow-x-auto whitespace-nowrap">
         {uploadImages.map((url, index) => (
           <div
             key={url + index}
