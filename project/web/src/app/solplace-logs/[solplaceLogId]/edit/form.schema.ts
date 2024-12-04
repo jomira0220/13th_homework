@@ -18,7 +18,7 @@ export interface ISolplaceLogsDetailEditSchema {
 
 export const solplaceLogsDetailEditSchema = z.object({
   title: z.string().min(1, { message: "제목을 입력해주세요." }),
-  images: z.array(z.string()).min(1),
+  images: z.array(z.string()).nonempty(),
   address: z.string().min(1, { message: "주소를 선택해주세요." }),
   lat: z.number(),
   lng: z.number(),
