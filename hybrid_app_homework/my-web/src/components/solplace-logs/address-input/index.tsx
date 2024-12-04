@@ -2,34 +2,13 @@
 
 import { IoIosArrowForward } from "react-icons/io";
 import Input from "@/components/commons/input";
-import { useSearchParams } from "next/navigation";
-import { useDataSetting } from "@/commons/settings/hook";
+import { useParamsControl } from "@/commons/hooks/use-params-control";
 
 export default function AddressInput() {
-  const searchParams = useSearchParams();
-  const params = Object.fromEntries(searchParams.entries());
+  const { addOrUpdateQueryParams, getQueryParamValue } = useParamsControl();
 
-  const { fetchApp } = useDataSetting();
-
-  const onSearchMap = async () => {
-    const result = await fetchApp({ query: "fetchDeviceLocationLatLngSet" }); // 위치 정보 권한 요청 및 정보 가져오기
-    console.log(result);
-
-    result.data &&
-      method.setValue("lat", result.data.fetchDeviceLocationLatLngSet.lat);
-    result.data &&
-      method.setValue("lng", result.data.fetchDeviceLocationLatLngSet.lng);
-
-    window.history.pushState(
-      null,
-      "",
-      `?lng=37.56682&lat=126.97865&showmap=true`
-    );
-    window.history.replaceState(
-      null,
-      "",
-      `?lng=37.56682&lat=126.97865&showmap=true`
-    );
+  const onSearchMap = () => {
+    addOrUpdateQueryParams({ showmap: "true" });
   };
 
   return (
@@ -38,22 +17,21 @@ export default function AddressInput() {
         <Input
           title="플레이스 주소"
           type="text"
-          keyname="address"
+          name="address"
           required
           hidden
           readOnly
         />
-        <Input type="number" keyname="zonecode" hidden readOnly />
-        <Input type="number" keyname="lng" hidden readOnly />
-        <Input type="number" keyname="lat" hidden readOnly />
+        <Input type="number" name="lng" hidden readOnly />
+        <Input type="number" name="lat" hidden readOnly />
       </div>
 
       <button
-        className="flex items-center justify-between w-full h-11 px-3 border border-black rounded-lg font-bold whitespace-nowrap truncate"
         type="button"
+        className="flex items-center justify-between w-full h-11 px-3 border-black border border-solid rounded-lg font-bold whitespace-nowrap truncate"
         onClick={() => onSearchMap()}
       >
-        {params.address || "플레이스 주소 입력"}
+        {getQueryParamValue("address") ?? "플레이스 주소 입력"}
         <IoIosArrowForward size={24} />
       </button>
     </div>
