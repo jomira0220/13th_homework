@@ -41,3 +41,12 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .button-primary {
+    @apply w-full h-12 font-bold bg-[var(--primary)] text-white text-lg leading-[1.5rem] rounded-lg disabled:bg-gray-300 disabled:text-gray-100;
+  }
+  .button-primary-off {
+    @apply w-full h-12 font-bold bg-gray-300 text-gray-100 text-lg leading-[1.5rem] rounded-lg;
+  }
+}
