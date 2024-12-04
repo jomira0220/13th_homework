@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "@/commons/styles/reset.css"; // 글로벌 스타일 커스텀 처리 및 초기화 처리 css
 import Layout from "@/commons/layout";
+import ApolloSetting from "@/commons/settings/apollo-setting";
+import DeviceSetting from "@/commons/settings/device-setting";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +25,11 @@ export default function RootLayout({ children }: IChildrenType) {
     <html lang="ko">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body className={`${localFontSet.variable} antialiased`}>
-        <Layout>{children}</Layout>
+        <ApolloSetting>
+          <DeviceSetting>
+            <Layout>{children}</Layout>
+          </DeviceSetting>
+        </ApolloSetting>
       </body>
     </html>
   );
