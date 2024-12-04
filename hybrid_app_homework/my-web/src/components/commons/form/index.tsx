@@ -15,9 +15,7 @@ interface IForm<T extends FieldValues> {
   children: React.ReactNode;
   schema: ZodSchema<T>;
   defaultValue?: DefaultValues<T>;
-  useInitialize: (method: UseFormReturn<T>) => {
-    onSubmit: (data: T) => void;
-  };
+  methodsSet?: (methods?: UseFormReturn<T>) => void;
 }
 
 export default function Form<T extends FieldValues>({
@@ -25,19 +23,23 @@ export default function Form<T extends FieldValues>({
   children,
   schema,
   defaultValue,
-  useInitialize,
+  methodsSet,
 }: IForm<T>) {
-  const method = useForm<T>({
+  const methods = useForm<T>({
     mode: "all",
     resolver: zodResolver(schema),
     defaultValues: defaultValue,
   });
 
-  const { onSubmit } = useInitialize(method);
+  const onSubmit = (data: T) => {
+    console.log("data", data);
+  };
+
+  methodsSet && methodsSet(methods);
 
   return (
-    <FormProvider {...method}>
-      <form onSubmit={method.handleSubmit(onSubmit)} className={className}>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)} className={className}>
         {children}
       </form>
     </FormProvider>
