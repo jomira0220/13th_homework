@@ -4,12 +4,13 @@ import { useDeviceSetting } from "@/commons/settings/05-02-device-setting-redire
 import Image from "next/image";
 import { useState } from "react";
 
-export default function PictureFullScreenPage() {
+export default function PictureFullScreenPinchZoomPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   const { fetchApp } = useDeviceSetting();
 
+  // 사진 전체보기 클릭 이벤트
   const onClickFullScreen = () => {
     // 로딩 처리하기
     setIsLoading(true);
@@ -20,25 +21,49 @@ export default function PictureFullScreenPage() {
 
     window.setTimeout(() => {
       setIsFullScreen(true); // 전체화면보기 상태값 true 저장
-      fetchApp({ query: "toggleDeviceLayoutForNotchTranslucentSet" });
+      fetchApp({ query: "toggleDeviceLayoutForNotchTranslucentSet" }); // 노치 겹침 가능하도록 설정 변경
+      fetchApp({ query: "toggleDeviceLayoutForPinchZoomSet" }); // 핀치 줌 가능 하도록 설정 변경 - 안드로이드만 됨
+
+      // ios에서 전체보기 클릭 시 핀치 줌 가능 하도록 설정 변경 처리를 위해 meta viewport 설정 변경 필요
+      document
+        .querySelector("meta[name=viewport]")
+        ?.setAttribute(
+          "content",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes"
+        );
 
       window.setTimeout(() => {
         // 로딩 해제하기
         setIsLoading(false);
       }, 100);
-    }, 0);
+    }, 100);
   };
 
+  // 사진 전체보기 닫기 클릭 이벤트
   const onClickClose = async () => {
-    setIsFullScreen(false); // 전체화면보기 상태값 false 저장
-    await fetchApp({ query: "toggleDeviceLayoutForNotchTranslucentSet" });
+    setIsLoading(true); // 로딩 처리하기
+
+    window.setTimeout(() => {
+      setIsFullScreen(false); // 전체화면보기 상태값 false 저장
+      fetchApp({ query: "toggleDeviceLayoutForNotchTranslucentSet" }); // 노치 겹침 불가능 하도록 설정 변경
+      fetchApp({ query: "toggleDeviceLayoutForPinchZoomSet" }); // 핀치 줌 불가능 하도록 설정 변경
+
+      // ios에서 전체보기 클릭 시 핀치 줌 불가능 하도록 설정 변경 처리를 위해 meta viewport 설정 변경 필요
+      document
+        .querySelector("meta[name=viewport]")
+        ?.setAttribute(
+          "content",
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0 maximum-scale=1.0, user-scalable=no"
+        );
+
+      window.setTimeout(() => {
+        setIsLoading(false); // 로딩 해제하기
+      }, 100);
+    }, 100);
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col justify-center items-center text-2xl w-screen h-screen"></div>
-    );
-  }
+  if (isLoading) return <></>;
+
   return (
     <>
       {isFullScreen ? (

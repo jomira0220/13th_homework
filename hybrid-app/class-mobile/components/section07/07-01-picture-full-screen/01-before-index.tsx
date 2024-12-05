@@ -1,6 +1,6 @@
 import { useApis } from "@/apis/section07/07-01-picture-full-screen";
 import { useRef } from "react";
-import { StatusBar, SafeAreaView, Platform, View } from "react-native";
+import { StatusBar, SafeAreaView, Platform } from "react-native";
 import { WebView } from "react-native-webview";
 
 // const computerAddress = "http://172.16.0.66:3000"; // 내 핸드폰에서 접속하기
