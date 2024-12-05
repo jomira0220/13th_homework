@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
 
 export default function RootLayout() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoaded(true);
