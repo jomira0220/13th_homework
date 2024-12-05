@@ -1,0 +1,20 @@
+#mapInfoWindow {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.625rem 0.9375rem;
+  border-radius: 0.5rem;
+  color: white;
+  transform: translate(-50%, -210%);
+  font-size: 0.875rem;
+}
+
+#mapInfoWindow::after {
+  content: "";
+  display: block;
+  width: 0.625rem;
+  height: 0.625rem;
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: rotate(45deg) translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+}
