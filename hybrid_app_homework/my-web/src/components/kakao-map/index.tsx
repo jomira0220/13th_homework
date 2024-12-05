@@ -5,9 +5,11 @@ import {
   MapTypeControl,
   ZoomControl,
   MapMarker,
+  CustomOverlayMap,
 } from "react-kakao-maps-sdk";
 import { useKakaoLoader } from "@/commons/hooks/use-kakao-loader";
 import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
+import styles from "./style.module.css";
 
 interface IKakaoMap {
   lat?: number;
@@ -17,7 +19,11 @@ interface IKakaoMap {
 
 export default function KaKaoMap({ lat, lng, className }: IKakaoMap) {
   useKakaoLoader();
-  const { position, mapClick } = useKakaoMap({ lat, lng });
+  const { address, position, mapClick, mapMarkerClick, overPopupVisible } =
+    useKakaoMap({
+      lat,
+      lng,
+    });
 
   return (
     <>
@@ -31,7 +37,14 @@ export default function KaKaoMap({ lat, lng, className }: IKakaoMap) {
       >
         <MapTypeControl position={"TOPRIGHT"} />
         <ZoomControl position={"RIGHT"} />
-        <MapMarker key={`marker__${lat}-${lng}`} position={position} />
+        <MapMarker
+          key={`marker__${lat}-${lng}`}
+          position={position}
+          onClick={mapMarkerClick}
+        />
+        <CustomOverlayMap position={position}>
+          {overPopupVisible && <div id={styles.mapInfoWindow}>{address}</div>}
+        </CustomOverlayMap>
       </Map>
     </>
   );
