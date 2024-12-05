@@ -17,7 +17,7 @@ type TFetchSolplaceLogs = {
 };
 
 export default function SolplaceLogsList() {
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const { data, fetchMore } = useQuery(FETCH_SOLPLACE_LOGS);
   console.log("data", data);
 
