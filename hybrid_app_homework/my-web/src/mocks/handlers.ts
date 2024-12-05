@@ -1,4 +1,3 @@
-import { IMAGES } from "@/commons/constants/images";
 import { graphql, HttpResponse } from "msw";
 import { faker, fakerKO } from "@faker-js/faker";
 
@@ -12,7 +11,7 @@ const dummy = {
   ),
   userId: fakerKO.internet.username(),
   title: fakerKO.lorem.words(),
-  contents: fakerKO.lorem.sentence(),
+  contents: fakerKO.lorem.lines(10),
   addressCity: fakerKO.location.city(),
   addressTown: fakerKO.location.country(),
   address: `${fakerKO.location.state()} ${fakerKO.location.city()} ${fakerKO.location.street()} ${fakerKO.location.buildingNumber()}`,
