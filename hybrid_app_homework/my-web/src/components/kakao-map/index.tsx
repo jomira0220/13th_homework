@@ -35,8 +35,8 @@ export default function KaKaoMap({ lat, lng, className }: IKakaoMap) {
           mapClick(mouseEvent);
         }}
       >
-        <MapTypeControl position={"TOPRIGHT"} />
-        <ZoomControl position={"RIGHT"} />
+        {/* <MapTypeControl position={"TOPRIGHT"} />
+        <ZoomControl position={"RIGHT"} /> */}
         <MapMarker
           key={`marker__${lat}-${lng}`}
           position={position}

@@ -16,6 +16,7 @@ export default function SolPlaceNewPage() {
   return (
     <>
       <SolplaceLogsMap />
+
       <Form<ISolplaceLogsSchema>
         schema={solplaceLogsSchema}
         methodsSet={useFormDefault}

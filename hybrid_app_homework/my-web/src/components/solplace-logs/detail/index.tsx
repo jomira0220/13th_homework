@@ -17,7 +17,10 @@ export default function SolPlaceDetail() {
     setIsMapVisible((prev) => !prev);
   };
   const { Id } = useParams();
-  const { data } = useQuery(FETCH_SOLPLACE_LOG, { variables: { id: Id } });
+
+  const { data } = useQuery(FETCH_SOLPLACE_LOG, {
+    variables: { id: Id },
+  });
 
   if (!data) return <></>;
   return (

@@ -85,7 +85,7 @@ export default function ImageUpload<T extends FieldValues>({
         사진 등록
       </button>
       <div className="overflow-x-auto whitespace-nowrap">
-        {uploadImages.map((url, index) => (
+        {uploadImages?.map((url, index) => (
           <div
             key={url + index}
             className="relative inline-block align-top ml-3 border border-gray-200 rounded-lg"

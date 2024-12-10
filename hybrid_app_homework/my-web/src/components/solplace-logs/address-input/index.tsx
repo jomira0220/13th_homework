@@ -2,14 +2,12 @@
 
 import { IoIosArrowForward } from "react-icons/io";
 import Input from "@/components/commons/input";
-import { useParamsControl } from "@/commons/hooks/use-params-control";
+import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
+import { useFormContext } from "react-hook-form";
 
 export default function AddressInput() {
-  const { addOrUpdateQueryParams, getQueryParamValue } = useParamsControl();
-
-  const onSearchMap = () => {
-    addOrUpdateQueryParams({ showmap: "true" });
-  };
+  const { getValues } = useFormContext();
+  const { mapOpenClick } = useKakaoMap();
 
   return (
     <div className="flex flex-col gap-2">
@@ -29,9 +27,9 @@ export default function AddressInput() {
       <button
         type="button"
         className="flex items-center justify-between w-full h-11 px-3 border-black border border-solid rounded-lg font-bold whitespace-nowrap truncate"
-        onClick={() => onSearchMap()}
+        onClick={mapOpenClick}
       >
-        {getQueryParamValue("address") ?? "플레이스 주소 입력"}
+        {getValues("address") ? getValues("address") : "플레이스 주소 입력"}
         <IoIosArrowForward size={24} />
       </button>
     </div>

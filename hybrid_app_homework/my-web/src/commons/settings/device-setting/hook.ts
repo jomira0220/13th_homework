@@ -6,39 +6,13 @@ declare const window: Window & {
   };
 };
 
-// 각 쿼리 응답 타입 정의
-export interface DeviceSystemForAppSetResponse {
-  data: {
-    fetchDeviceSystemForAppSet: {
-      appVersion: string;
-    };
-  };
-}
-
-export interface DeviceSystemForPlatformSetResponse {
-  data: {
-    fetchDeviceSystemForPlatformSet: {
-      modelName: string;
-    };
-  };
-}
-
-export interface DeviceLocationForLatLngSetResponse {
-  data: {
-    fetchDeviceLocationForLatLngSet: {
-      lat: number;
-      lng: number;
-    };
-  };
-}
-
 export const useDeviceSetting = () => {
-  const fetchApp = <T>({ query }: { query: string }): Promise<T> => {
-    return new Promise((resolve) => {
+  const fetchApp = async <T>({ query, variables = {} }: { query: string; variables?: any }): Promise<T> => {
+    const result = await new Promise<T>((resolve) => {
       FETCH_DEVICE_KEY[query] = resolve;
-
-      window.ReactNativeWebView.postMessage(JSON.stringify({ query }));
+      window.ReactNativeWebView.postMessage(JSON.stringify({ query, variables }));
     });
+    return result;
   };
 
   return {

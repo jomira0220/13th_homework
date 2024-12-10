@@ -6,6 +6,7 @@ type IHeaderType = {
       title: string;
       hasBack: boolean;
       isTransparent: boolean;
+      isNotchTransparent?: boolean;
       hasLogo?: boolean;
       backUrl?: string;
     };
@@ -13,13 +14,17 @@ type IHeaderType = {
 };
 
 // prettier-ignore
-export const HeaderType = (params:Params ):IHeaderType  => ({
+export const HeaderType = (params: Params, queryParams?: { showmap?: string }): IHeaderType =>{
+  const showmap =  queryParams?.showmap === "true";
+
+  return {
   GLOBAL: {
-    "/solplace-logs/new": { hasBack: true, title: "플레이스 등록", isTransparent: false },
-    "/solplace-logs": { hasBack: false, title: "플레이스", isTransparent: false },
+    "/solplace-logs/new": { hasBack: true, title: "플레이스 등록", isTransparent: false, isNotchTransparent: false },
+    "/solplace-logs": { hasBack: false, title: "플레이스", isTransparent: false, isNotchTransparent: false },
   },
   LOCAL:{
-    [`/solplace-logs/${params.Id}`]: { hasBack: true, title: "", isTransparent: true },
-    [`/solplace-logs/${params.Id}/edit`]: { hasBack: true, title: "플레이스 수정", isTransparent: false },
+    [`/solplace-logs/${params.Id}`]: { hasBack: true, title: "", isTransparent: true, isNotchTransparent: true },
+    [`/solplace-logs/${params.Id}/edit`]: { hasBack: true, title: showmap ? "" : "플레이스 수정", isTransparent: showmap ? true : false, isNotchTransparent: showmap ? true : false },
   }
-});
+}
+};

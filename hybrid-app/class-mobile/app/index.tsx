@@ -34,8 +34,18 @@
 
 // [ Section07 ]
 // import PictureFullScreenPage from "@/components/section07/07-01-picture-full-screen/02-after-index";
-import PictureFullScreenPinchZoomPage from "@/components/section07/07-02-picture-full-screen-pinch-zoom";
+// import PictureFullScreenPinchZoomPage from "@/components/section07/07-02-picture-full-screen-pinch-zoom";
+
+// [ Section08 ]
+// import AndroidBackPage from "@/components/section08/08-01-android-back";
+// import AndroidBackAndExitPage from "@/components/section08/08-04-android-back-and-exit";
+
+// [ Section09 ]
+import ViewTransitionPage from "@/components/section09/09-01-view-transition/page";
+
+// [ Section10 ]
+// import LoginRefreshtokenPage from "@/components/section10/10-01-login-refreshtoken";
 
 export default function StartPage() {
-  return <PictureFullScreenPinchZoomPage />;
+  return <ViewTransitionPage />;
 }

@@ -7,7 +7,11 @@ import "./globals.css";
 // import LayoutFooterContentsShortAndLong from "@/commons/layout/02-05-layout-footer-contents-short-and-long";
 // import DeviceSetting from "@/commons/settings/03-06-device-setting";
 // import DeviceSettingVariables from "@/commons/settings/05-01-device-setting-variables";
-import DeviceSettingRedirect from "@/commons/settings/05-02-device-setting-redirect";
+// import DeviceSettingRedirect from "@/commons/settings/05-02-device-setting-redirect";
+// import DeviceSettingBack from "@/commons/settings/08-01-device-setting-back";
+// import DeviceSettingBackAndExit from "@/commons/settings/08-04-device-setting-back-and-exit";
+import DeviceSettingViewTransition from "@/commons/settings/09-01-device-setting-view-transition";
+import RoutingSettingViewTransition from "@/commons/settings/09-01-routing-setting-view-transition";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -66,7 +70,20 @@ export default function RootLayout({
         {/* <DeviceSettingVariables>{children}</DeviceSettingVariables> */}
 
         {/* 8). 05-02-schedule-notifications-click */}
-        <DeviceSettingRedirect>{children}</DeviceSettingRedirect>
+        {/* <DeviceSettingRedirect>{children}</DeviceSettingRedirect> */}
+
+        {/* 9). 08-01-android-back */}
+        {/* <DeviceSettingBack>{children}</DeviceSettingBack> */}
+
+        {/* 10). 08-04-android-back-and-exit */}
+        {/* <DeviceSettingBackAndExit>{children}</DeviceSettingBackAndExit> */}
+
+        {/* 11). 09-01-view-transition */}
+        <DeviceSettingViewTransition>
+          <RoutingSettingViewTransition>
+            {children}
+          </RoutingSettingViewTransition>
+        </DeviceSettingViewTransition>
       </body>
     </html>
   );

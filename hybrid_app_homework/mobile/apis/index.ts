@@ -1,48 +1,33 @@
-import WebView from "react-native-webview";
+import { useDeviceLocation } from "./use-device-location";
+import { useDeviceNotifications } from "./use-device-notifications";
+import { useDeviceSystem } from "./use-device-system";
+import { useDeviceLayout } from "./use-device-layout";
+import { useDeviceOpenSettings } from "./use-open-settings";
 
-type APIS = {
-  [key: string]: () => void;
-};
+export const useApis = (webviewRef: any) => {
+  let APIS = {};
 
-type ApiResponse = {
-  [K in keyof APIS]: Record<string, any>;
-};
-
-type UseApisReturnType = {
-  onRequest: (query: keyof APIS) => void;
-  onResponse: (result: ApiResponse[keyof APIS]) => void;
-};
-
-export const useApis = (webviewRef: React.RefObject<WebView<{}>>): UseApisReturnType => {
-  const onResponse = (result: ApiResponse[keyof APIS]) => {
+  const onResponse = (result: any) => {
     webviewRef.current?.postMessage(JSON.stringify(result));
   };
 
-  const onRequest = (query: keyof APIS) => {
-    switch (query) {
-      case "fetchDeviceSystemForAppSet": {
-        onResponse({ fetchDeviceSystemForAppSet: { appVersion: "v1.0" } }); // expo-constants 라이브러리 설치하면 조회 가능
-        break;
-      }
-
-      case "fetchDeviceSystemForPlatformSet": {
-        onResponse({
-          fetchDeviceSystemForPlatformSet: { modelName: "iPhone 7 Plus" }, // expo-device 라이브러리 설치하면 조회 가능
-        });
-        break;
-      }
-
-      case "fetchDeviceLocationForLatLngSet": {
-        onResponse({
-          fetchDeviceLocationForLatLngSet: { lat: 37, lng: 128 }, // expo-device 라이브러리 설치하면 조회 가능
-        });
-        break;
-      }
-    }
+  const onRequest = (query: any, variables: any) => {
+    APIS[query](variables);
   };
+
+  [
+    useDeviceSystem,
+    useDeviceLocation,
+    useDeviceNotifications,
+    useDeviceOpenSettings,
+    useDeviceLayout,
+  ].forEach((el) => {
+    APIS = { ...APIS, ...el(onResponse) };
+  });
 
   return {
     onRequest,
     onResponse,
+    layout: APIS.layout,
   };
 };

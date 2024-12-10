@@ -19,40 +19,17 @@ const dummy = {
   lng: 126.97865,
 };
 
-const {
-  images,
-  userId,
-  title,
-  contents,
-  addressCity,
-  addressTown,
-  address,
-  lat,
-  lng,
-} = dummy;
-
 const solplaceLogs = Array.from({ length: 30 }, (_, index) => {
   return {
     id: `${index + 1}`,
-    images,
-    userId,
-    title,
-    contents,
-    addressCity,
-    addressTown,
+    ...dummy,
   };
 });
 
 const solplaceLog = Array.from({ length: 30 }, (_, index) => {
   return {
     id: `${index + 1}`,
-    images,
-    userId,
-    title,
-    contents,
-    address,
-    lat,
-    lng,
+    ...dummy,
   };
 });
 
