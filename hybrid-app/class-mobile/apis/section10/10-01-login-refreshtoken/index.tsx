@@ -1,46 +1,46 @@
-import { useDeviceSystem } from "./01-use-device-system"
-import { useDeviceSystem2 } from "./01-use-device-system2"
-import { useDeviceLocation } from "./02-use-device-location"
+// import { useDeviceSystem } from "./01-use-device-system"
+import { useDeviceAuth } from "@/apis/section10_/10-01-login-refreshtoken/06-use-device-auth";
+import { useDeviceSystem2 } from "./01-use-device-system2";
+import { useDeviceLocation } from "./02-use-device-location";
 // import { useDeviceNotifications } from "./03-use-device-notifications"
-import { useDeviceNotifications2 } from "./03-use-device-notifications2"
+import { useDeviceNotifications2 } from "./03-use-device-notifications2";
 // import { useDeviceLayout } from "./04-use-device-layout"
-import { useDeviceLayout2 } from "./04-use-device-layout2"
-import { useDeviceRouting } from "./05-use-device-routing"
-import { useDeviceRouting2 } from "./05-use-device-routing2"
-import { useDeviceAuth } from "./06-use-device-auth"
+import { useDeviceLayout2 } from "./04-use-device-layout2";
+// import { useDeviceRouting } from "./05-use-device-routing"
+import { useDeviceRouting2 } from "./05-use-device-routing2";
 
 export const useApis = (webviewRef) => {
-    let APIS = {}
+  let APIS = {};
 
-    const onResponse = (result) => {
-        webviewRef.current?.postMessage(JSON.stringify(result))
-    }
+  const onResponse = (result) => {
+    webviewRef.current?.postMessage(JSON.stringify(result));
+  };
 
-    const onRequest = (query, variables) => {
-        APIS[query](variables)
-    }
+  const onRequest = (query, variables) => {
+    APIS[query](variables);
+  };
 
-    // APIS = {
-    //     ...useDeviceSystem(onResponse),
-    //     ...useDeviceLocation(onResponse),
-    //     ...useDeviceNotifications2(onResponse)
-    // }
+  // APIS = {
+  //     ...useDeviceSystem(onResponse),
+  //     ...useDeviceLocation(onResponse),
+  //     ...useDeviceNotifications2(onResponse)
+  // }
 
-    // 한방에 주입하기(리팩토링)
-    [
-        useDeviceSystem2, //
-        useDeviceLocation, 
-        useDeviceNotifications2,
-        useDeviceLayout2,
-        useDeviceRouting2,
-        useDeviceAuth,
-    ].forEach((el) => {
-        APIS = { ...APIS, ...el(onResponse) }
-    })
+  // 한방에 주입하기(리팩토링)
+  [
+    useDeviceSystem2, //
+    useDeviceLocation,
+    useDeviceNotifications2,
+    useDeviceLayout2,
+    useDeviceRouting2,
+    useDeviceAuth,
+  ].forEach((el) => {
+    APIS = { ...APIS, ...el(onResponse) };
+  });
 
-    return {
-        onResponse,
-        onRequest,
-        layout: APIS.layout
-    }
-}
+  return {
+    onResponse,
+    onRequest,
+    layout: APIS.layout,
+  };
+};

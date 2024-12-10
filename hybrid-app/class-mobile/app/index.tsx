@@ -44,11 +44,11 @@
 // import ViewTransitionPage from "@/components/section09/09-01-view-transition";
 
 // [ Section10 ]
-// import LoginRefreshtokenPage from "@/components/section10/10-01-login-refreshtoken";
+import LoginRefreshtokenPage from "@/components/section10/10-01-login-refreshtoken";
 
 // [ Section11 ]
-import PullToRefreshPage from "@/components/section11/11-01-pull-to-refresh";
+// import PullToRefreshPage from "@/components/section11/11-01-pull-to-refresh";
 
 export default function StartPage() {
-  return <PullToRefreshPage />;
+  return <LoginRefreshtokenPage />;
 }

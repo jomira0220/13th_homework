@@ -22,6 +22,7 @@ interface IApolloUploadSetting {
 export default function ApolloHeaderSetting(props: IApolloUploadSetting) {
   const { accessToken, setAccessToken } = useAccessTokenStore();
   const { setIsLoaded } = useLoadStore(); // 로딩 상태를 변경하기 위한 함수
+
   useEffect(() => {
     // 임시 방식
     // setAccessToken(localStorage.getItem("accessToken") ?? "");
