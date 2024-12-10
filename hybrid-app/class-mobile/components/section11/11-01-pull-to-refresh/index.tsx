@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
+import { FlatList } from "react-native-reanimated/lib/typescript/Animated";
 
 // const 내컴퓨터접속주소 = "http://172.16.0.106:3000" // 내핸드폰에서 접속하기
 const 내컴퓨터접속주소 = "http://10.0.2.2:3000"; // 안드로이드에뮬레이터에서 접속하기
@@ -20,6 +21,19 @@ export default function PullToRefreshPage() {
       <StatusBar
         style="dark" // 안드로이드 + IOS 노치 글자색
       />
+
+      {/* 1. 웹뷰를 통째로 리프레시 하는 방법 */}
+      {/* <WebView pullToRefreshEnabled={true} /> */}
+
+      {/* 2. <FlatList />  활용하여 react-native에서 제공하는 리프레시 하는 방법 */}
+      {/* <FlatList
+        data={[]}
+        refreshControl={}
+        onRefresh={}
+      /> */}
+
+      {/* 3. 웹뷰 내에서 목록만 리프레시 하는 방법 */}
+      {/* => class-web 에서 예시 작성함 */}
 
       <WebView
         ref={webviewRef}
