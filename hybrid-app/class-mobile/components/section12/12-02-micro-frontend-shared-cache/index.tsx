@@ -1,5 +1,5 @@
-import { useApis } from "@/apis/section12/12-01-micro-frontend";
-import { useRef, useState } from "react";
+import { useApis } from "@/apis/section12/12-02-micro-frontend-shared-cache";
+import { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
@@ -8,15 +8,24 @@ import { Text, View } from "react-native";
 const 내게시판_서비스_접속주소 = "http://10.0.2.2:3000"; // 안드로이드 에뮬레이터에서 접속하기
 const 내설정_서비스_접속주소 = "http://10.0.2.2:3500"; // 안드로이드 에뮬레이터에서 접속하기
 
-export default function MicroFrontendPage() {
+export default function MicroFrontendSharedCachePage() {
   const webviewRef = useRef<WebView>(null);
-  const { onRequest, layout } = useApis(webviewRef);
+  const { onRequest, layout, onResponse } = useApis(webviewRef);
 
   const [menuState, setMenuState] = useState("게시판");
 
+  // 메뉴 상태 변경 처리용 함수
   const onPressMenu = (menuName: string) => () => {
     setMenuState(menuName);
   };
+
+  // 12-02-micro-frontend-cache
+  // => 메뉴 상태를 확인하여 메뉴가 바뀔때마다 메뉴 변경을 알려주는 처리
+  useEffect(() => {
+    onResponse({
+      menuChange: true,
+    });
+  }, [menuState]);
 
   return (
     <SafeAreaView
@@ -31,7 +40,7 @@ export default function MicroFrontendPage() {
       <WebView
         ref={menuState === "게시판" ? webviewRef : null} // 12-01-micro-frontend에서 수정
         source={{
-          uri: `${내게시판_서비스_접속주소}/section12/12-01-micro-frontend`,
+          uri: `${내게시판_서비스_접속주소}/section12/12-02-micro-frontend-shared-cache`,
         }}
         onMessage={(event) => {
           if (!event.nativeEvent.data) return;
@@ -46,7 +55,7 @@ export default function MicroFrontendPage() {
       <WebView
         ref={menuState === "내설정" ? webviewRef : null} // 12-01-micro-frontend에서 수정
         source={{
-          uri: `${내설정_서비스_접속주소}/section12/12-01-micro-frontend`,
+          uri: `${내설정_서비스_접속주소}/section12/12-02-micro-frontend-shared-cache`,
         }}
         onMessage={(event) => {
           if (!event.nativeEvent.data) return;
