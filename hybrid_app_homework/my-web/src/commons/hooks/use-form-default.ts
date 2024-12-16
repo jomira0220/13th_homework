@@ -2,10 +2,10 @@
 
 import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
 import type { UseFormReturn } from "react-hook-form";
-import type { ISolplaceLogsSchema } from "@/commons/schema/solplace-logs/form.schema";
+import type { ISolplaceLogsSchema } from "@/commons/schema/solplace-logs";
 import { useParams } from "next/navigation";
 import { useQuery } from "@apollo/client";
-import { FETCH_SOLPLACE_LOG } from "@/commons/apis/graphql/queries/fetch-solplace-log.query";
+import { FETCH_SOLPLACE_LOG } from "@/commons/apis/graphql/queries/fetch-solplace-log";
 import { useEffect } from "react";
 import { useImageUploadStore } from "@/commons/stores/image-upload";
 
