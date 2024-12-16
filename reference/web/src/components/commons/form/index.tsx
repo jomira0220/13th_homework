@@ -2,7 +2,13 @@
 
 import { ZodSchema } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DefaultValues, FieldValues, FormProvider, useForm, UseFormReturn } from "react-hook-form";
+import {
+  DefaultValues,
+  FieldValues,
+  FormProvider,
+  useForm,
+  UseFormReturn,
+} from "react-hook-form";
 
 interface IForm<T extends FieldValues> {
   children: React.ReactNode;
@@ -13,7 +19,13 @@ interface IForm<T extends FieldValues> {
   };
 }
 
-export default function Form<T extends FieldValues>({ children, schema, defaultValue, useInitialize }: IForm<T>) {
+export default function Form<T extends FieldValues>({
+  children,
+  schema,
+  defaultValue,
+  useInitialize,
+}: IForm<T>) {
+  console.log("schema:::", schema);
   const method = useForm<T>({
     resolver: zodResolver(schema),
     mode: "all",

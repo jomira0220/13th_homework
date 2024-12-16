@@ -8,10 +8,12 @@ import { useImageStore } from "@/commons/stores/image-store";
 // import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
 // import { useDeviceSettingRedirect } from "@/commons/settings/device-setting-redirect/hook";
 import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
+import { useMutation } from "@apollo/client";
+import { CREATE_SOLPLACE_LOG } from "@/commons/apis/graphql/mutations/create-solplace-log";
+import { UPLOAD_FILE } from "@/commons/apis/graphql/mutations/upload-file";
+import { imageToFile } from "@/commons/libraries/image-to-file";
 
-export const useInitialize = (
-  method: UseFormReturn<ISolplaceLogsNewSchema>
-) => {
+export const useInitialize = (method: UseFormReturn<ISolplaceLogsNewSchema>) => {
   const { fetchApp } = useDeviceSetting();
   const router = useRouter();
 
@@ -21,22 +23,38 @@ export const useInitialize = (
   const images = useImageStore((state) => state.images);
   const clearImages = useImageStore((state) => state.clearImages);
 
-  const onSubmit = (data: ISolplaceLogsNewSchema) => {
-    console.log(data);
+  const [createSolplaceLog] = useMutation(CREATE_SOLPLACE_LOG);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
-    router.push(
-      `/solplace-logs?toastMessage=${encodeURIComponent("플레이스 등록 완료")}`
+  const onSubmit = async (data: ISolplaceLogsNewSchema) => {
+    const imageDecoded = images.map((el) => {
+      return imageToFile(el);
+    });
+
+    const imageResult = await Promise.all(
+      imageDecoded.map(async (el) => await uploadFile({ variables: { file: el } }))
     );
 
-    fetchApp({
-      query: "requestDeviceNotificationsForPermissionSolplaceLogNewSet",
+    const imageResultUrls = imageResult.map((el) => el.data?.uploadFile.url ?? "");
+
+    // 솔플레이스 등록 로직
+    const result = await createSolplaceLog({
+      variables: {
+        createSolplaceLogInput: {
+          title: data.title,
+          contents: data.contents,
+          address: data.address,
+          lat: data.lat,
+          lng: data.lng,
+          images: imageResultUrls,
+        },
+      },
     });
-    // 아직 API 연결이 안되었기 때문에 강제로 1번 글로 이동하는 것으로 구현
-    // TODO: API 연결시 생성된 글 id를 받아서 넘겨야함
-    fetchApp({
-      query: `createDeviceNotificationsForSolplaceLogNewSet`,
-      variables: { solplaceLogId: "1" },
-    });
+
+    router.push(`/solplace-logs?toastMessage=${encodeURIComponent("플레이스 등록 완료")}`);
+
+    fetchApp({ query: "requestDeviceNotificationsForPermissionSolplaceLogNewSet" });
+    fetchApp({ query: `createDeviceNotificationsForSolplaceLogNewSet`, variables: { solplaceLogId: result.data.id } });
 
     clearImages();
   };

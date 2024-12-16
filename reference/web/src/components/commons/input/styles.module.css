@@ -8,6 +8,19 @@
   gap: 0.5rem;
 }
 
+.error {
+  background-color: var(--gray-W);
+  color: var(--gray-B);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  font-size: 0.875rem;
+
+  color: var(--red);
+  border: 0.063rem solid red;
+  /* background-color: var(--red); */
+}
+
 .label {
   display: flex;
   align-items: center;

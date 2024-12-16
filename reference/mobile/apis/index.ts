@@ -3,7 +3,8 @@ import { useDeviceNotifications } from "./use-device-notifications";
 import { useDeviceSystem } from "./use-device-system";
 import { useDeviceLayout } from "./use-device-layout";
 import { useDeviceOpenSettings } from "./use-open-settings";
-
+import { useDeviceRouting } from "./use-device-routing";
+import { useDeviceAuth } from "./use-device-auth";
 export const useApis = (webviewRef: any) => {
   let APIS = {};
 
@@ -21,6 +22,8 @@ export const useApis = (webviewRef: any) => {
     useDeviceNotifications,
     useDeviceOpenSettings,
     useDeviceLayout,
+    useDeviceRouting,
+    useDeviceAuth,
   ].forEach((el) => {
     APIS = { ...APIS, ...el(onResponse) };
   });
@@ -29,5 +32,6 @@ export const useApis = (webviewRef: any) => {
     onRequest,
     onResponse,
     layout: APIS.layout,
+    setLayout: APIS.setLayout,
   };
 };

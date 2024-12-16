@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const useDeviceLayout = (onResponse: any) => {
   const [layout, setLayout] = useState({
-    isNotchTranslucent: false,
+    isNotchTranslucent: true,
     notchContent: "dark-content", // light-content, dark-content, ...
     notchBackgroundColor: "transparent", // transparent, black, ...
     isPinchZoom: false,
@@ -35,5 +35,7 @@ export const useDeviceLayout = (onResponse: any) => {
   return {
     toggleDeviceLayoutForNotchTranslucentSet,
     toggleDeviceLayoutForPinchZoomSet,
+    layout,
+    setLayout,
   };
 };

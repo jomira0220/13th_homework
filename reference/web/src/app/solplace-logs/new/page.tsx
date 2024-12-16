@@ -6,7 +6,7 @@ import { ISolplaceLogsNewSchema, solplaceLogsNewSchema } from "./form.schema";
 import styles from "./styles.module.css";
 import { useInitialize } from "./form.initialize";
 
-export default async function SolplaceLogsNewPage() {
+export default function SolplaceLogsNewPage() {
   return (
     <main>
       <Form<ISolplaceLogsNewSchema> schema={solplaceLogsNewSchema} useInitialize={useInitialize}>

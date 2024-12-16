@@ -76,9 +76,19 @@ function AddImageBase<T extends FieldValues>({ size, name }: IAddImageBase<T>) {
       {images?.length > 0
         ? images.map((image, index) =>
             size === "s" ? (
-              <ButtonSuccessImageSS key={index} onClick={() => deleteImage(index)} image={image} index={index} />
+              <ButtonSuccessImageSS
+                key={index}
+                onClick={() => deleteImage(index)}
+                image={image.startsWith("data:") ? image : `https://storage.googleapis.com/${image}`}
+                index={index}
+              />
             ) : (
-              <ButtonSuccessImageMM key={index} onClick={() => deleteImage(index)} image={image} index={index} />
+              <ButtonSuccessImageMM
+                key={index}
+                onClick={() => deleteImage(index)}
+                image={image.startsWith("data:") ? image : `https://storage.googleapis.com/${image}`}
+                index={index}
+              />
             )
           )
         : null}

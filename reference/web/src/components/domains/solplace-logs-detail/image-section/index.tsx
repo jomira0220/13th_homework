@@ -29,7 +29,11 @@ export default function SolplaceLogsDetailImageSection() {
       >
         {images?.map((image: string, index: number) => (
           <SwiperSlide key={index}>
-            <SolplaceLogsDetailImages image={image} imageIndex={index + 1} totalImage={images.length} />
+            <SolplaceLogsDetailImages
+              image={`https://storage.googleapis.com/${image}`}
+              imageIndex={index + 1}
+              totalImage={images.length}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

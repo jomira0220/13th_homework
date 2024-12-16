@@ -19,7 +19,7 @@ export default function PlaceCard(props: IPlaceCard) {
       <div className={styles.card}>
         <Image
           className={styles.card_image}
-          src={props.images}
+          src={`https://storage.googleapis.com/${props.images}`}
           alt={`${props.title} 장소 사진`}
           width={0}
           height={0}

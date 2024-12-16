@@ -8,7 +8,7 @@ import { FieldValues, Path, useFormContext } from "react-hook-form";
 import InputErrorMessage from "./input-error-message";
 
 interface IInputBase<T> extends InputHTMLAttributes<HTMLInputElement> {
-  inputType: "normal" | "address";
+  inputType: "normal" | "address" | "password";
   label?: string;
   isRequired: boolean;
   name: Path<T>;
@@ -19,15 +19,17 @@ export default function InputBase<T extends FieldValues>({
   label,
   isRequired,
   name,
+
   ...rest
 }: IInputBase<T>) {
   const chooseType = {
     normal: styles.normal,
     address: styles.address,
+    password: styles.normal,
   };
 
   const { register, formState } = useFormContext<T>();
-
+  const hasError = !!formState.errors[name];
   return (
     <div className={styles.container}>
       <div className={styles.input}>
@@ -40,7 +42,14 @@ export default function InputBase<T extends FieldValues>({
           {isRequired && <div className={styles.star}>*</div>}
         </div>
         <div className={styles.input_box}>
-          <input className={chooseType[inputType]} {...register(name)} {...rest} />
+          <input
+            type={inputType === "password" ? "password" : ""}
+            className={` ${
+              hasError ? styles.error : `${chooseType[inputType]}`
+            }`}
+            {...register(name)}
+            {...rest}
+          />
           {inputType === "address" && (
             <Image
               className={styles.right_arrow}
@@ -51,7 +60,10 @@ export default function InputBase<T extends FieldValues>({
             />
           )}
         </div>
-        <InputErrorMessage errorMessage={formState.errors[name]?.message?.toString() ?? ""} />
+
+        <InputErrorMessage
+          errorMessage={formState.errors[name]?.message?.toString() ?? ""}
+        />
       </div>
     </div>
   );
@@ -62,26 +74,105 @@ interface IInput<T> extends InputHTMLAttributes<HTMLInputElement> {
   name: Path<T>;
 }
 
-export function InputNormal<T extends FieldValues>({ name, ...rest }: IInput<T>) {
-  return <InputBase<T> inputType="normal" isRequired={false} name={name} {...rest} />;
+export function InputNormal<T extends FieldValues>({
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T> inputType="normal" isRequired={false} name={name} {...rest} />
+  );
 }
 
-export function InputNormalWithLabel<T extends FieldValues>({ label, name, ...rest }: IInput<T>) {
-  return <InputBase<T> inputType="normal" isRequired={false} name={name} label={label} {...rest} />;
+export function InputNormalWithLabel<T extends FieldValues>({
+  label,
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T>
+      inputType="normal"
+      isRequired={false}
+      name={name}
+      label={label}
+      {...rest}
+    />
+  );
 }
 
-export function InputNormalWithLabelRequired<T extends FieldValues>({ label, name, ...rest }: IInput<T>) {
-  return <InputBase<T> inputType="normal" isRequired={true} name={name} label={label} {...rest} />;
+export function InputNormalWithLabelRequired<T extends FieldValues>({
+  label,
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T>
+      inputType="normal"
+      isRequired={true}
+      name={name}
+      label={label}
+      {...rest}
+    />
+  );
 }
 
-export function InputAddress<T extends FieldValues>({ name, ...rest }: IInput<T>) {
-  return <InputBase<T> inputType="address" isRequired={false} name={name} {...rest} />;
+export function InputAddress<T extends FieldValues>({
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T>
+      inputType="address"
+      isRequired={false}
+      name={name}
+      {...rest}
+    />
+  );
 }
 
-export function InputAddressWithLabel<T extends FieldValues>({ label, name, ...rest }: IInput<T>) {
-  return <InputBase<T> inputType="address" isRequired={false} name={name} label={label} {...rest} />;
+export function InputAddressWithLabel<T extends FieldValues>({
+  label,
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T>
+      inputType="address"
+      isRequired={false}
+      name={name}
+      label={label}
+      {...rest}
+    />
+  );
 }
 
-export function InputAddressWithLabelRequired<T extends FieldValues>({ label, name, ...rest }: IInput<T>) {
-  return <InputBase<T> inputType="address" isRequired={true} name={name} label={label} {...rest} />;
+export function InputAddressWithLabelRequired<T extends FieldValues>({
+  label,
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T>
+      inputType="address"
+      isRequired={true}
+      name={name}
+      label={label}
+      {...rest}
+    />
+  );
+}
+
+export function InputPasswordWithLabelRequired<T extends FieldValues>({
+  label,
+  name,
+  ...rest
+}: IInput<T>) {
+  return (
+    <InputBase<T>
+      inputType="password"
+      isRequired={true}
+      name={name}
+      label={label}
+      {...rest}
+    />
+  );
 }

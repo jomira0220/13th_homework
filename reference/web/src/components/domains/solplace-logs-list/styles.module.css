@@ -11,7 +11,7 @@
   padding-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem 1.25rem;
+  gap: 1.25rem 1rem;
 }
 
 .no_place_wrapper {

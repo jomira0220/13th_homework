@@ -12,14 +12,29 @@ interface IButtonBase extends ButtonHTMLAttributes<HTMLButtonElement> {
   shape: "rectangle" | "circle";
 }
 
-function ButtonBase<T extends FieldValues>({ buttonText, buttonColor, size, shape, ...rest }: IButtonBase) {
+function ButtonBase<T extends FieldValues>({
+  buttonText,
+  buttonColor,
+  size,
+  shape,
+  ...rest
+}: IButtonBase) {
   const formContext = useFormContext<T>();
   const isFormValid = formContext ? formContext.formState.isValid : true;
 
-  const buttonClassNames = clsx(styles.button, styles[buttonColor], styles[size], styles[shape]);
+  const buttonClassNames = clsx(
+    styles.button,
+    styles[buttonColor],
+    styles[size],
+    styles[shape]
+  );
 
   return (
-    <button className={buttonClassNames} disabled={!isFormValid} {...rest}>
+    <button
+      className={buttonClassNames}
+      disabled={rest.type !== "button" && !isFormValid}
+      {...rest}
+    >
       {buttonText}
     </button>
   );
@@ -30,27 +45,39 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function ButtonPrimarySFull(props: IButton) {
-  return <ButtonBase buttonColor="blue" size="s" shape="rectangle" {...props} />;
+  return (
+    <ButtonBase buttonColor="blue" size="s" shape="rectangle" {...props} />
+  );
 }
 
 export function ButtonPrimaryMFull(props: IButton) {
-  return <ButtonBase buttonColor="blue" size="m" shape="rectangle" {...props} />;
+  return (
+    <ButtonBase buttonColor="blue" size="m" shape="rectangle" {...props} />
+  );
 }
 
 export function ButtonDarkSFull(props: IButton) {
-  return <ButtonBase buttonColor="dark" size="s" shape="rectangle" {...props} />;
+  return (
+    <ButtonBase buttonColor="dark" size="s" shape="rectangle" {...props} />
+  );
 }
 
 export function ButtonDarkMFull(props: IButton) {
-  return <ButtonBase buttonColor="dark" size="m" shape="rectangle" {...props} />;
+  return (
+    <ButtonBase buttonColor="dark" size="m" shape="rectangle" {...props} />
+  );
 }
 
 export function ButtonLightSFull(props: IButton) {
-  return <ButtonBase buttonColor="light" size="s" shape="rectangle" {...props} />;
+  return (
+    <ButtonBase buttonColor="light" size="s" shape="rectangle" {...props} />
+  );
 }
 
 export function ButtonLightMFull(props: IButton) {
-  return <ButtonBase buttonColor="light" size="m" shape="rectangle" {...props} />;
+  return (
+    <ButtonBase buttonColor="light" size="m" shape="rectangle" {...props} />
+  );
 }
 
 export function ButtonCircleSFull(props: IButton) {

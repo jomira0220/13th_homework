@@ -25,6 +25,7 @@ export const headerType = (params: Params): THeaderType => ({
       hasLogo: false,
       hasBack: true,
       isTransParent: false,
+      backUrl: `/login`,
     },
     "/solplace-logs/new": {
       title: "플레이스 등록",
@@ -34,12 +35,6 @@ export const headerType = (params: Params): THeaderType => ({
     },
     "/solplace-logs": {
       title: "플레이스",
-      hasLogo: false,
-      hasBack: false,
-      isTransParent: false,
-    },
-    "/mypage": {
-      title: "내 설정",
       hasLogo: false,
       hasBack: false,
       isTransParent: false,
@@ -57,6 +52,12 @@ export const headerType = (params: Params): THeaderType => ({
       hasBack: true,
       isTransParent: false,
       backUrl: `/solplace-logs/${params.solplaceLogId}`,
+    },
+    "/mypage": {
+      title: "내 설정",
+      hasLogo: false,
+      hasBack: false,
+      isTransParent: false,
     },
   },
   localHeader: {},

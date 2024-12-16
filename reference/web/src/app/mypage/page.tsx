@@ -5,12 +5,6 @@ export default function MyPage() {
   return (
     <main>
       <MyPageToggleSection />
-      {/* <div style={{ width: "calc(100%)" }}>
-          <Divider />
-        </div> */}
-
-      {/* <MyPageToggleSection subTitle="알림 권한" /> */}
-
       <Footer buttonText="" />
     </main>
   );

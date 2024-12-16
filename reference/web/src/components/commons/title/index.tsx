@@ -13,10 +13,18 @@ interface ITitle {
   title: string;
 }
 
+interface IContent {
+  content: string;
+}
+
 export function Title({ title }: ITitle) {
   return <TitleBase title={title} className={styles.title} />;
 }
 
 export function SubTitle({ title }: ITitle) {
   return <TitleBase title={title} className={styles.sub_title} />;
+}
+
+export function Content({ content }: IContent) {
+  return <TitleBase title={content} className={styles.content} />;
 }

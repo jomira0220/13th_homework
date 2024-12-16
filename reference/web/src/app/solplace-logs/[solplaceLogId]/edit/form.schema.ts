@@ -8,6 +8,7 @@ export interface IInputBaseProps<T> {
 }
 
 export interface ISolplaceLogsDetailEditSchema {
+  id?: string;
   title: string;
   address: string;
   lat: number;

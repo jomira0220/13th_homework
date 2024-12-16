@@ -3,10 +3,11 @@
 import { ICONS } from "@/commons/constants/images";
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Title } from "@/components/commons/title";
 import { headerType } from "./constants";
 import clsx from "clsx";
+import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
 
 interface IHeaderBase {
   hasLogo?: boolean;
@@ -17,20 +18,33 @@ interface IHeaderBase {
   backUrl?: string;
 }
 
-function HeaderBase({ hasLogo, hasBack, isTransParent, title, children, backUrl }: IHeaderBase) {
-  const router = useRouter();
-
+function HeaderBase({
+  hasLogo,
+  hasBack,
+  isTransParent,
+  title,
+  children,
+  backUrl,
+}: IHeaderBase) {
+  const { onRoutingBack } = useDeviceSetting();
   const onClickBack = () => {
-    if (backUrl) {
-      router.push(backUrl);
-    } else {
-      history.back();
-    }
+    // history.back();
+    onRoutingBack(backUrl);
   };
   return (
     <>
-      <div className={clsx(styles.header, { [styles.transparent]: isTransParent })}>
-        {hasLogo && <Image className={styles.logo} src={ICONS.logo.src} alt={ICONS.logo.alt} width={0} height={0} />}
+      <div
+        className={clsx(styles.header, { [styles.transparent]: isTransParent })}
+      >
+        {hasLogo && (
+          <Image
+            className={styles.logo}
+            src={ICONS.logo.src}
+            alt={ICONS.logo.alt}
+            width={0}
+            height={0}
+          />
+        )}
         {hasBack && (
           <div onClick={onClickBack}>
             <Image
@@ -55,7 +69,8 @@ export function GlobalHeader() {
 
   const props = headerType(params).globalHeader[pathname];
 
-  const isDisplay = props === undefined ? { display: "none" } : { display: "block" };
+  const isDisplay =
+    props === undefined ? { display: "none" } : { display: "block" };
 
   return (
     <div style={isDisplay}>
