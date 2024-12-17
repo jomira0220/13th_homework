@@ -6,6 +6,7 @@ export const useDeviceSystem = (onResponse: any) => {
   const isAndroid = Platform.OS === "android";
   const isIos = Platform.OS === "ios";
 
+  // 앱 버전 가져오기
   const fetchDeviceSystemForAppSet = () => {
     onResponse({
       fetchDeviceSystemForAppSet: {
@@ -16,6 +17,7 @@ export const useDeviceSystem = (onResponse: any) => {
     });
   };
 
+  // 디바이스 정보 가져오기
   const fetchDeviceSystemForPlatformSet = () => {
     onResponse({
       fetchDeviceSystemForPlatformSet: {
@@ -26,6 +28,7 @@ export const useDeviceSystem = (onResponse: any) => {
     });
   };
 
+  // 앱이 foreground로 동작중인지 여부
   const fetchDeviceSystemForAppStateSet = () => {
     const isForeground = AppState.currentState === "active";
     onResponse({
