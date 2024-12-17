@@ -17,11 +17,21 @@ export const useDeviceLocation = (onResponse: any) => {
     }
   };
 
-  // 위치 정보 제공 권한을 요청하는 훅
+  // 위치 정보 제공 권한 상태를 가져오는 훅
   const fetchDeviceLocationForPermissionSet = async () => {
-    const result = await Location.requestForegroundPermissionsAsync();
+    const result = await Location.getForegroundPermissionsAsync(); // getForegroundPermissionsAsync
     onResponse({
       fetchDeviceLocationForPermissionSet: {
+        status: result.status,
+      },
+    });
+  };
+
+  // 위치 정보 제공 권한을 요청하는 훅
+  const requestDeviceLocationForPermissionSet = async () => {
+    const result = await Location.requestForegroundPermissionsAsync(); // requestForegroundPermissionsAsync
+    onResponse({
+      requestDeviceLocationForPermissionSet: {
         status: result.status,
       },
     });
@@ -30,5 +40,6 @@ export const useDeviceLocation = (onResponse: any) => {
   return {
     fetchDeviceLocationForLatLngSet,
     fetchDeviceLocationForPermissionSet,
+    requestDeviceLocationForPermissionSet,
   };
 };
