@@ -1,17 +1,17 @@
 import Footer from "@/commons/layout/footer";
-import Input from "@/components/commons/input";
+import { Input } from "@/components/commons/input";
 import TextArea from "@/components/commons/textarea";
 import Form from "@/components/commons/form";
 import {
   ISolplaceLogsSchema,
   solplaceLogsSchema,
-} from "@/commons/schema/solplace-logs/form.schema";
+} from "@/commons/schema/solplace-logs";
 
-import ImageUpload from "@/components/solplace-logs/image-upload";
-import AddressInput from "@/components/solplace-logs/address-input";
-import SolplaceLogsMap from "@/components/solplace-logs/edit-new-map";
-import ButtonBase from "@/components/commons/button";
-import { useFormDefault } from "@/commons/hooks/use-form-default";
+import ImageUpload from "@/components/domain/solplace-logs/image-upload";
+import AddressInput from "@/components/domain/solplace-logs/address-input";
+import SolplaceLogsMap from "@/components/domain/solplace-logs/edit-new-map";
+import { SubmitButton } from "@/components/commons/button";
+import { useSolplaceNew } from "./hook";
 export default function SolPlaceNewPage() {
   return (
     <>
@@ -19,7 +19,7 @@ export default function SolPlaceNewPage() {
 
       <Form<ISolplaceLogsSchema>
         schema={solplaceLogsSchema}
-        methodsSet={useFormDefault}
+        methodsSet={useSolplaceNew}
         className="w-full h-[calc(100vh-4rem)] flex flex-col"
       >
         <div className="p-[1.25rem_1.25rem_0]">
@@ -44,9 +44,9 @@ export default function SolPlaceNewPage() {
           </div>
         </div>
         <Footer>
-          <ButtonBase className="button-primary disabled:button-primary-off">
+          <SubmitButton className="button-primary disabled:button-primary-off">
             로그 등록
-          </ButtonBase>
+          </SubmitButton>
         </Footer>
       </Form>
     </>
