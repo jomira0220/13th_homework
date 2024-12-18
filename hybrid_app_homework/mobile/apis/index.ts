@@ -3,9 +3,17 @@ import { useDeviceNotifications } from "./use-device-notifications";
 import { useDeviceSystem } from "./use-device-system";
 import { useDeviceLayout } from "./use-device-layout";
 import { useDeviceOpenSettings } from "./use-open-settings";
+import { useDeviceAuth } from "./use-device-auth";
+import { useDeviceRouting } from "./use-device-routing";
+import type { WebView } from "react-native-webview";
+import type { ILayout } from "./use-device-layout";
 
-export const useApis = (webviewRef: any) => {
-  let APIS = {};
+interface IAPIS {
+  [key: string]: any;
+}
+
+export const useApis = (webviewRef: React.RefObject<WebView>) => {
+  let APIS: IAPIS = {};
 
   const onResponse = (result: any) => {
     webviewRef.current?.postMessage(JSON.stringify(result));
@@ -21,6 +29,8 @@ export const useApis = (webviewRef: any) => {
     useDeviceNotifications,
     useDeviceOpenSettings,
     useDeviceLayout,
+    useDeviceRouting,
+    useDeviceAuth,
   ].forEach((el) => {
     APIS = { ...APIS, ...el(onResponse) };
   });
@@ -29,5 +39,6 @@ export const useApis = (webviewRef: any) => {
     onRequest,
     onResponse,
     layout: APIS.layout,
+    setLayout: APIS.setLayout,
   };
 };
