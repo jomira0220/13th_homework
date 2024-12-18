@@ -15,6 +15,7 @@ export interface IHeaderBaseProps {
   isTransparent?: boolean;
   isNotchTransparent?: boolean;
   children?: React.ReactNode;
+  backUrl?: string;
 }
 
 const HeaderBase = ({
@@ -23,11 +24,13 @@ const HeaderBase = ({
   isTransparent,
   isNotchTransparent,
   children,
+  backUrl,
 }: IHeaderBaseProps) => {
   const router = useRouter();
+  const { onRoutingBack } = useDeviceSetting();
   const { queryParams, addOrUpdateQueryParams } = useParamsControl();
-
   const { fetchApp } = useDeviceSetting();
+
   useEffect(() => {
     if (isNotchTransparent === undefined) return;
     if (isNotchTransparent) {
@@ -51,7 +54,7 @@ const HeaderBase = ({
     if (queryParams.showmap) {
       addOrUpdateQueryParams({ showmap: "false" });
     } else {
-      router.back();
+      onRoutingBack(backUrl);
     }
   };
 
@@ -76,11 +79,10 @@ const HeaderBase = ({
   );
 };
 
-export default function HeaderGlobal() {
+export function HeaderGlobal() {
   const pathname = usePathname();
   const params = useParams();
   const options = HeaderType(params).GLOBAL[pathname];
-
   return (
     <div style={{ display: options ? "block" : "none" }}>
       <HeaderBase {...options} />
