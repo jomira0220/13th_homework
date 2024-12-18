@@ -1,4 +1,4 @@
-import HeaderGlobal from "./header";
+import { HeaderGlobal } from "./header";
 
 interface IChildrenType {
   children: React.ReactNode;
