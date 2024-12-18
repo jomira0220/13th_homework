@@ -1,9 +1,9 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import { FETCH_SOLPLACE_LOGS } from "@/commons/apis/graphql/queries/fetch-solplace-logs.query";
+import { FETCH_SOLPLACE_LOGS } from "@/commons/apis/graphql/queries/fetch-solplace-logs";
 import { useState } from "react";
-import SolPlaceItem from "@/components/solplace-logs/solplace-list/solplace-item";
+import SolPlaceItem from "@/components/domain/solplace-logs/solplace-list/solplace-item";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 type TFetchSolplaceLogs = {
