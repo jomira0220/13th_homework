@@ -6,7 +6,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import styles from "./style.module.css";
 import Image from "next/image";
 
-export default function SolPlaceDetailSlide({ images }) {
+export default function SolPlaceDetailSlide({ images }: { images: string[] }) {
   return (
     <div>
       <Swiper
