@@ -1,17 +1,17 @@
 import Footer from "@/commons/layout/footer";
-import Input from "@/components/commons/input";
+import { Input } from "@/components/commons/input";
 import TextArea from "@/components/commons/textarea";
 import Form from "@/components/commons/form";
 import {
   ISolplaceLogsSchema,
   solplaceLogsSchema,
-} from "@/commons/schema/solplace-logs/form.schema";
+} from "@/commons/schema/solplace-logs";
 
-import ImageUpload from "@/components/solplace-logs/image-upload";
-import AddressInput from "@/components/solplace-logs/address-input";
-import SolplaceLogsMap from "@/components/solplace-logs/edit-new-map";
-import ButtonBase from "@/components/commons/button";
-import { useFormDefault } from "@/commons/hooks/use-form-default";
+import ImageUpload from "@/components/domain/solplace-logs/image-upload";
+import AddressInput from "@/components/domain/solplace-logs/address-input";
+import SolplaceLogsMap from "@/components/domain/solplace-logs/edit-new-map";
+import { SubmitButton } from "@/components/commons/button";
+import { useSolplaceEdit } from "./hook";
 import { Header } from "@/commons/layout/header";
 
 export default function SolPlaceEditPage() {
@@ -21,13 +21,13 @@ export default function SolPlaceEditPage() {
       <SolplaceLogsMap />
       <Form<ISolplaceLogsSchema>
         schema={solplaceLogsSchema}
-        methodsSet={useFormDefault}
+        methodsSet={useSolplaceEdit}
         className="w-full h-[calc(100vh-4rem)] flex flex-col"
       >
         <div className="p-[1.25rem_1.25rem_0]">
           <div className="flex flex-col gap-5">
             <ImageUpload name="images" />
-            <Input
+            <Input<ISolplaceLogsSchema>
               type="text"
               name="title"
               title="플레이스 이름"
@@ -46,9 +46,9 @@ export default function SolPlaceEditPage() {
           </div>
         </div>
         <Footer>
-          <ButtonBase className="button-primary disabled:button-primary-off">
+          <SubmitButton className="button-primary disabled:button-primary-off">
             로그 수정
-          </ButtonBase>
+          </SubmitButton>
         </Footer>
       </Form>
     </>
