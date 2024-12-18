@@ -3,13 +3,13 @@
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineCreate } from "react-icons/md";
-import KaKaoMap from "@/components/kakao-map";
-import SolPlaceDetailSlide from "@/components/solplace-logs/detail-slide";
+import KaKaoMap from "@/components/commons/kakao-map";
+import SolPlaceDetailSlide from "@/components/domain/solplace-logs/detail-slide";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { FETCH_SOLPLACE_LOG } from "@/commons/apis/graphql/queries/fetch-solplace-log.query";
+import { FETCH_SOLPLACE_LOG } from "@/commons/apis/graphql/queries/fetch-solplace-log";
 
 export default function SolPlaceDetail() {
   const [isMapVisible, setIsMapVisible] = useState<boolean>(false);
