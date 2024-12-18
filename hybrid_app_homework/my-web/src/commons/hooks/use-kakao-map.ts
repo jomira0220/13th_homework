@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParamsControl } from "@/commons/hooks/use-params-control";
 import type { UseFormReturn } from "react-hook-form";
-import type { ISolplaceLogsSchema } from "@/commons/schema/solplace-logs/form.schema";
-import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
+import type { ISolplaceLogsSchema } from "@/commons/schema/solplace-logs";
+// import { useDeviceSetting } from "@/commons/settings/device-setting/hook";
 
 interface IUseKakaoMapProps {
   methods?: UseFormReturn<ISolplaceLogsSchema>;
@@ -13,7 +13,7 @@ interface IUseKakaoMapProps {
 }
 
 export function useKakaoMap({ methods, lat, lng }: IUseKakaoMapProps = {}) {
-  const { fetchApp } = useDeviceSetting();
+  // const { fetchApp } = useDeviceSetting();
 
   const { addOrUpdateQueryParams, queryParams, searchParams } =
     useParamsControl();
