@@ -1,9 +1,9 @@
 "use client";
 
-import KaKaoMap from "@/components/kakao-map";
+import KaKaoMap from "@/components/commons/kakao-map";
 import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
 import { useParamsControl } from "@/commons/hooks/use-params-control";
-import Headers from "@/commons/layout/header";
+import { Header } from "@/commons/layout/header";
 
 export default function SolplaceLogsMap() {
   const { addOrUpdateQueryParams } = useParamsControl();
@@ -13,7 +13,7 @@ export default function SolplaceLogsMap() {
     return (
       <>
         <div className="fixed left-0 top-0 z-10 w-screen h-screen flex flex-col justify-between">
-          <Headers />
+          <Header />
           <KaKaoMap className="w-screen flex flex-1" />
           <div className="bg-white flex flex-col gap-5 p-5">
             <input
