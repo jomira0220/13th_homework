@@ -8,13 +8,17 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "buildNumber": "1000001",
       "supportsTablet": true,
-      "buildNumber": "1000001"
+      "infoPlist": {
+        "NSLocationAlwaysUsageDescription": "플레이스 등록시 위치정보가 사용됩니다.",
+        "NSLocationWhenInUseUsageDescription": "플레이스 등록시 위치정보가 사용됩니다."
+      }
     },
     "android": {
       "versionCode": 1000001,
@@ -28,10 +32,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-secure-store"
-    ],
+    "plugins": ["expo-router", "expo-secure-store"],
     "experiments": {
       "typedRoutes": true
     }
