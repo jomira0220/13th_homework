@@ -1,13 +1,22 @@
 import { useState } from "react";
 
+export interface ILayout {
+  isNotchTranslucent: boolean;
+  notchContent: string;
+  notchBackgroundColor: string;
+  isPinchZoom: boolean;
+}
+
 export const useDeviceLayout = (onResponse: any) => {
-  const [layout, setLayout] = useState({
+  // 레이아웃 상태
+  const [layout, setLayout] = useState<ILayout>({
     isNotchTranslucent: false,
     notchContent: "dark-content", // light-content, dark-content, ...
     notchBackgroundColor: "transparent", // transparent, black, ...
     isPinchZoom: false,
   });
 
+  // 노치 노출 설정 변경
   const toggleDeviceLayoutForNotchTranslucentSet = (variables) => {
     setLayout((prev) => ({
       ...prev,
@@ -20,6 +29,7 @@ export const useDeviceLayout = (onResponse: any) => {
     });
   };
 
+  // 핀치 줌 설정 변경
   const toggleDeviceLayoutForPinchZoomSet = () => {
     setLayout((prev) => ({
       ...prev,
@@ -34,6 +44,7 @@ export const useDeviceLayout = (onResponse: any) => {
 
   return {
     layout,
+    setLayout,
     toggleDeviceLayoutForNotchTranslucentSet,
     toggleDeviceLayoutForPinchZoomSet,
   };
