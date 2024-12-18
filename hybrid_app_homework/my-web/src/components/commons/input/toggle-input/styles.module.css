@@ -1,0 +1,65 @@
+/* 토글 */
+.toggleInputBox {
+  display: inline-block;
+}
+
+.toggleLabel {
+  display: inline-block;
+}
+
+/* 기존의 checkbox 버튼 숨기기 */
+.toggleInput {
+  display: none;
+}
+
+/* 토글 스타일 지정*/
+.toggleSwitch {
+  position: relative;
+  display: block;
+  min-width: 40px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.toggleSwitch.toggleTextSwitch .toggleText {
+  width: auto;
+  box-sizing: content-box;
+}
+
+.toggleSwitch.toggleTextSwitch .toggleText.off {
+  text-align: right;
+  padding: 0 10px 0 30px;
+}
+
+.toggleSwitch.toggleTextSwitch .toggleText.on {
+  text-align: left;
+  padding: 0 30px 0 10px;
+}
+
+/* 토글 버튼 스타일 지정 */
+.toggleSwitch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: calc(0% + 0.125rem);
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: left 0.3s ease;
+}
+
+/* 토글 ON 스타일 지정*/
+.toggleInput:checked + .toggleSwitch {
+  background-color: var(--primary); /* 배경색 변경 */
+  color: white; /* 글자색 변경 */
+}
+
+/* 토글 ON인 경우에 버튼 위치 지정 */
+.toggleInput:checked + .toggleSwitch::before {
+  left: calc(100% - 20px - 0.125rem);
+}
