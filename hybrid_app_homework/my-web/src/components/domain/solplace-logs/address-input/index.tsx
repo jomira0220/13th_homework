@@ -1,18 +1,19 @@
 "use client";
 
 import { IoIosArrowForward } from "react-icons/io";
-import Input from "@/components/commons/input";
+import { Input } from "@/components/commons/input";
 import { useKakaoMap } from "@/commons/hooks/use-kakao-map";
 import { useFormContext } from "react-hook-form";
+import type { ISolplaceLogsSchema } from "@/commons/schema/solplace-logs";
 
 export default function AddressInput() {
-  const { getValues } = useFormContext();
+  const { getValues } = useFormContext<ISolplaceLogsSchema>();
   const { mapOpenClick } = useKakaoMap();
 
   return (
     <div className="flex flex-col gap-2">
       <div>
-        <Input
+        <Input<ISolplaceLogsSchema>
           title="플레이스 주소"
           type="text"
           name="address"
@@ -20,8 +21,8 @@ export default function AddressInput() {
           hidden
           readOnly
         />
-        <Input type="number" name="lng" hidden readOnly />
-        <Input type="number" name="lat" hidden readOnly />
+        <Input<ISolplaceLogsSchema> type="number" name="lng" hidden readOnly />
+        <Input<ISolplaceLogsSchema> type="number" name="lat" hidden readOnly />
       </div>
 
       <button
